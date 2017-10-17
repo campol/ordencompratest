@@ -1,0 +1,84 @@
+<div class="container" ng-controller = "OrdenCompraController">
+	<div class="row">
+		<div class="col-md-12  panel panel-primary">
+			<div class="panel-heading">Crear Orden de compra</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class = "col-md-12">
+						<output>Clientes</output>
+						<ui-select ng-model="person.selected" theme="select2"
+							on-select="getProductosDisp($item)" class="form-control"
+							title="Seleccione un cliente"> <ui-select-match
+							placeholder="Seleccione o busque un cliente de la lista...">{{$select.selected.nombre}}</ui-select-match>
+						<ui-select-choices
+							repeat="item in clients | filter: $select.search">
+						<div ng-bind-html="item.nombre | highlight: $select.search"></div>
+						<small ng-bind-html="item.email | highlight: $select.search"></small>
+						</ui-select-choices> </ui-select>
+					</div>					
+				</div>
+				<div class="row">
+					<div class = "col-md-4">
+						<output>Productos disponibles</output>
+						<select style = "width: 100%;" name="prodts" multiple="multiple" ng-options="p as p.nombre for p in listproductos track by p.id" ng-model="selectedProdct">
+						</select>
+					</div>
+					<div class = "col-md-2">
+						<br/>
+						<br/>
+						<button type="button" class="btn btn-info" ng-click = "addProducts()">Agregar</button>
+					</div>
+					
+				</div>
+				<div class = "row">
+					<div class = "col-md-6" ng-controller="DatepickerPopupCtrl">
+						<br/>
+						<br/>
+						<output>Direcci&oacute;n de entrega</output>
+						<input name="dir" type = "text" class="form-control" ng-model = "ordenC.direccionEntrga"/>
+						<output>Fecha</output>
+					
+		           		 <p class="input-group">
+					          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="ordenC.dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" clear-text="Borrar" close-text="Cerrar" alt-input-formats="altInputFormats" />
+					          <span class="input-group-btn">
+					            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+					          </span>
+				         </p>
+        
+						<output>Orden de compra</output>
+						<table id="mytable" class="table table-bordered">
+
+							<thead>
+								<th style="width: 5%;">No</th>
+								<th style="width: 10%;">Cant</th>
+								<th style="width: 30%;">Descripci&oacute;n</th>
+								<th style="width: 10%;">Precio</th>
+								<th style="width: 25%;">Acciones</th>
+							</thead>
+
+							<tbody>
+								<tr ng-repeat="p in listItems">
+									<td>{{$index+1}}</td>
+									<td><input name="cant{{$index}}" ng-model="p.cantidad"/></td>
+									<td><input name="descripcion{{$index}}"	ng-model="p.descripcionProd"/></td>
+									<td><input name="precio{{$index}}" ng-model="p.precio"/></td>
+									<td>
+										<div class="buttons">
+											<button class="btn btn-danger"
+												ng-click="deleteOrden($index)">Borrar</button>
+										</div>
+									</td>
+								</tr>
+
+							</tbody>
+
+						</table>
+						<button class="btn btn-primary"	ng-click="crearOrden()">Crear</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

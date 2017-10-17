@@ -11,6 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	@RequestMapping("/home")
 	public String home() {
-		return "home";
+		return "index";
+	}
+	
+	@RequestMapping("/crearOrden")
+	public String crearOrden() {
+		return "crearOrden";
+	}
+	
+	@RequestMapping("/listarOrden")
+	public String listarOrden() {
+		return "listarOrden";
 	}
 }

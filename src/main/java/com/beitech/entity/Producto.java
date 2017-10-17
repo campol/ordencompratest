@@ -6,7 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+/**
+ * Representa los productos que maneja el sistema
+ * @author lcampo
+ *
+ */
 @Entity
 @Table(name = "product")
 public class Producto implements Serializable{

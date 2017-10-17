@@ -1,0 +1,68 @@
+<div class="container" ng-controller = "OrdenCompraController">
+	<div class="row">
+		<div class="col-md-12  panel panel-primary">
+		<div class="panel-heading">Listar ordenes de compra</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class = "col-md-12">
+					<output>Clientes</output>
+						<ui-select ng-model="person.selected" theme="select2"
+							on-select="getOrdensMes($item)" class="form-control"
+							title="Seleccione un cliente"> <ui-select-match
+							placeholder="Seleccione o busque un cliente de la lista...">{{$select.selected.nombre}}</ui-select-match>
+						<ui-select-choices
+							repeat="item in clients | filter: $select.search">
+						<div ng-bind-html="item.nombre | highlight: $select.search"></div>
+						<small ng-bind-html="item.email | highlight: $select.search"></small>
+						</ui-select-choices> </ui-select>
+				</div>
+			</div>
+			<div class="row">
+				<div class = "col-md-12" ng-controller="DatepickerPopupCtrl">
+					<output>Fecha desde</output>
+		           		 <p class="input-group">
+					          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="ordenC.fechaDesde" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" clear-text="Borrar" close-text="Cerrar" alt-input-formats="altInputFormats" />
+					          <span class="input-group-btn">
+					            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+					          </span>
+				         </p>
+				    <output>Fecha Hasta</output>
+		           		 <p class="input-group">
+					          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="ordenC.fechaHasta" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" clear-text="Borrar" close-text="Cerrar" alt-input-formats="altInputFormats" />
+					          <span class="input-group-btn">
+					            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+					          </span>
+				         </p>
+				    <button class="btn btn-primary"	ng-click="buscarOrdenes()">Buscar</button>
+				    <output>Ordenes de compra</output>
+						<table id="mytable" class="table table-bordered">
+
+							<thead>
+							    <th style="width: 10px;">No</th>
+								<th style="width: 30px;">Fecha de creaci&oacute;n</th>
+								<th style="width: 20px;">Id orden</th>
+								<th style="width: 30px;">Total $</th>
+								<th style="width: 100px;">Direcci&oacute;n de entrega</th>
+								<th style="width: 100px;">Productos</th>
+							</thead>
+
+							<tbody>
+								<tr ng-repeat="ord in listOrdenes">
+									<td>{{$index+1}}</td>
+									<td>{{ord.fechaCreacion}}</td>
+									<td>{{ord.idOrden}}</td>
+									<td>{{ord.totalP}}</td>
+									<td>{{ord.dirEntrega}}</td>
+									<td>{{ord.productos}}</td>				
+								</tr>
+
+							</tbody>
+
+						</table>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	
+</div>

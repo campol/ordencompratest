@@ -4,18 +4,21 @@
 package com.beitech.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
+ * Representa los datos del cliente
  * @author lcampo
  *
  */
-@Entity
 @Table(name = "customer")
+@Entity
 public class Cliente implements Serializable {
 	/**
 	 * 
@@ -30,6 +33,9 @@ public class Cliente implements Serializable {
 	private String email;
 	@Column(name = "phone")
 	private String telefono;
+
+	@Transient
+	private List<Orden> ordenes;
 	public Integer getId() {
 		return id;
 	}
@@ -53,6 +59,12 @@ public class Cliente implements Serializable {
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	public List<Orden> getOrdenes() {
+		return ordenes;
+	}
+	public void setOrdenes(List<Orden> ordenes) {
+		this.ordenes = ordenes;
 	}
 	
 }
